@@ -1,35 +1,29 @@
 #include <iostream>
 #include <bits/stdc++.h>
 #include <cmath>
-int countDigit(int n)
-{
-    int count = 0;
-    while (n > 0) {
-        n = n / 10;
-        ++count;
-    }
-    return count;
-}
-int fibonacci_sum_squares_naive( int n, int digits) {
-    if (n <= 1)
-        return n;
+using namespace std;
+    long long fibonacci_sum_fast(long long n) {
+        long long f[60];
+        f[0]=0;
+        f[1]=1;
+        for(int i=2;i<60;i++)
+        {
+            f[i]=(f[i-1]%10+f[i-2]%10)%10;
+        }
+        long long r = (++n)%60; // reminder after cycles done
 
-      int previous = 0;
-      int current  = 1;
-       int sum      = 0;
-    for (int i = 0; i <n; ++i) {
-        int tmp_previous = previous%digits;
-        previous = current%digits;
-        current = (tmp_previous + current)%digits;
+
+    return (f[r]*f[r-1])%10;
     }
-    sum = ((previous%digits)*(current%digits))%10;
-    return sum;
-}
+
+
+
+
 
 int main() {
-     int  n = 0,digits;
-    std::cin >> n;
-        for(int i=0,L=countDigit(n);i<L-1;i++)
-            digits*=10;
-    std::cout << fibonacci_sum_squares_naive(n,digits);
+    long long n;
+    cin >> n;
+
+    cout << fibonacci_sum_fast(n);
+
 }
